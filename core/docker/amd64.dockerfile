@@ -22,7 +22,9 @@ RUN \
     groupadd trino --gid 1000 && \
     useradd trino --uid 1000 --gid 1000 && \
     mkdir -p /usr/lib/trino /data/trino && \
-    chown -R "trino:trino" /usr/lib/trino /data/trino
+    chown -R "trino:trino" /usr/lib/trino /data/trino && \
+    chgrp -R 0 /usr/lib/trino /data/trino /.trino_history && \
+    chmod -R g=u /usr/lib/trino /data/trino /.trino_history
 
 ARG TRINO_VERSION
 COPY trino-cli-${TRINO_VERSION}-executable.jar /usr/bin/trino
@@ -32,4 +34,6 @@ COPY --chown=trino:trino default/etc /etc/trino
 EXPOSE 8080
 USER trino:trino
 ENV LANG en_US.UTF-8
+RUN chgrp -R 0 /some/directory && \
+    chmod -R g=u /some/directory
 CMD ["/usr/lib/trino/bin/run-trino"]
