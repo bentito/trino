@@ -35,6 +35,4 @@ COPY --chown=trino:trino default/etc /etc/trino
 EXPOSE 8080
 USER trino:trino
 ENV LANG en_US.UTF-8
-RUN chgrp -R 0 /some/directory && \
-    chmod -R g=u /some/directory
 CMD ["/usr/lib/trino/bin/run-trino"]
