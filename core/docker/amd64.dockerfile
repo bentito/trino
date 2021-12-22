@@ -23,6 +23,7 @@ RUN \
     useradd trino --uid 1000 --gid 1000 && \
     mkdir -p /usr/lib/trino /data/trino && \
     chown -R "trino:trino" /usr/lib/trino /data/trino && \
+    touch /.trino_history && \
     chgrp -R 0 /usr/lib/trino /data/trino /.trino_history && \
     chmod -R g=u /usr/lib/trino /data/trino /.trino_history
 
